@@ -28,7 +28,7 @@ class EmojiTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         self.navigationController?.navigationBar.tintColor = UIColor.white
-        self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.orange]
+        self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -55,7 +55,13 @@ class EmojiTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "openEmojiDetails", sender: nil)
+        performSegue(withIdentifier: "openEmojiDetails", sender: emojis[indexPath.row])
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let emojiDefVC = segue.destination as! EmojiDetailsViewController
+        
+        emojiDefVC.emojiLabel = sender as! String
     }
 
 }
